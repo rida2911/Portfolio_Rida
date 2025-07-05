@@ -1,0 +1,75 @@
+<div class="about-container">
+  <!-- Background Elements -->
+  <div class="bg-elements">
+    <div class="floating-shape shape-1"></div>
+    <div class="floating-shape shape-2"></div>
+    <div class="floating-shape shape-3"></div>
+  </div>
+
+  <div class="about-content">
+    <!-- Main Content Area -->
+    <div class="main-content">
+
+      <div class="text-content" [class.slide-in-left]="isVisible">
+        <!-- Greeting -->
+        <div class="greeting">
+          <span class="wave">👋</span>
+          <h1 class="name-intro">
+            Hi, I'm <span class="name-highlight">{{ name }}</span>
+          </h1>
+        </div>
+
+        <!-- Main Headline -->
+        <div class="headline-container">
+          <h2 class="headline">
+            <span class="text-regular">I'm </span>
+            <span class="text-highlight">selectively skilled</span>
+            <span class="text-regular"> in </span> 
+            <span class="text-highlight">software development</span>
+          </h2>
+          <h2 class="headline">
+            <span class="text-regular">with a strong focus on producing</span>
+          </h2>
+          <h2 class="headline">
+            <span class="text-highlight">high quality</span>
+            <span class="text-regular"> & </span>
+            <span class="text-highlight">impactful</span>
+            <span class="text-regular"> digital solutions.</span>
+          </h2>
+        </div>
+
+        <!-- Role Tags -->
+        <div class="role-tags">
+          <span class="role-tag" *ngFor="let role of roles; let i = index" 
+                [style.animation-delay]="(i * 0.2) + 's'">
+            {{ role }}
+          </span>
+        </div>
+
+        <!-- Description -->
+        <div class="description">
+          <p>{{ description }}</p>
+        </div>
+      </div>
+
+      <!-- Right Side - Text Content -->
+      <div class="image-content" [class.slide-in-right]="isVisible">
+        <div class="image-container">
+          <!-- Profile Image -->
+          <div class="profile-image">
+            <img src="rida_jahan.jpg" alt="Rida Jahan" />
+            <div class="image-border"></div>
+            <div class="image-glow"></div>
+          </div>
+
+        </div>
+      </div>
+  </div>
+
+
+
+  <!-- Particle Effects -->
+  <div class="particles">
+    <div class="particle" *ngFor="let i of [1,2,3,4,5,6,7,8,9]"></div>
+  </div>
+</div>

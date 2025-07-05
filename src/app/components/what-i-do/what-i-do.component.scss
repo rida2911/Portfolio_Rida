@@ -1,0 +1,198 @@
+@import '../../../styles/variables';
+@import '../../../styles/mixins';
+
+.what-i-do-section {
+  min-height: 100vh;
+  background: $primary-dark;
+  padding: $spacing-xl 0;
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+      radial-gradient(circle at 20% 80%, rgba(138, 43, 226, 0.1) 0%, transparent 50%),
+      radial-gradient(circle at 80% 20%, rgba(76, 0, 153, 0.1) 0%, transparent 50%);
+    pointer-events: none;
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 $spacing-lg;
+    position: relative;
+    z-index: 1;
+  }
+
+  .section-header {
+    text-align: center;
+    margin-bottom: $spacing-xl;
+
+    .section-subtitle {
+      font-family: $font-secondary;
+      font-size: $font-size-small;
+      color: $text-muted;
+      letter-spacing: 0.2em;
+      font-weight: 400;
+      text-transform: uppercase;
+    }
+  }
+
+  .services-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0;
+    max-width: 900px;
+    margin: 0 auto;
+
+    @include respond-to(md) {
+      gap: $spacing-sm;
+    }
+  }
+
+  .service-item {
+    position: relative;
+    padding: $spacing-lg 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    cursor: pointer;
+    transition: all $transition-medium;
+    background: transparent;
+
+    &:last-child {
+      border-bottom: none;
+    }
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.02);
+      
+      .service-title {
+        @include gradient-text(linear-gradient(135deg, $primary-violet, $primary-light-purple));
+        transform: translateX($spacing-sm);
+      }
+    }
+
+    &.hovered {
+      background: rgba(138, 43, 226, 0.05);
+      border-radius: 8px;
+      border-color: rgba(138, 43, 226, 0.3);
+      
+      .service-title {
+        @include gradient-text(linear-gradient(135deg, $primary-violet, $primary-light-purple));
+      }
+    }
+
+    .service-title {
+      font-family: $font-primary;
+      font-size: $font-size-xxl;
+      font-weight: 700;
+      color: $text-light;
+      margin: 0;
+      line-height: 1.2;
+      transition: all $transition-medium;
+      letter-spacing: -0.02em;
+
+      @include respond-to(sm) {
+        font-size: 2.5rem;
+      }
+
+      @include respond-to(md) {
+        font-size: 3rem;
+      }
+
+      @include respond-to(lg) {
+        font-size: 3.5rem;
+      }
+    }
+
+    .service-description {
+      max-height: 0;
+      overflow: hidden;
+      opacity: 0;
+      transition: all $transition-medium;
+      margin-top: 0;
+
+      &.visible {
+        max-height: 200px;
+        opacity: 1;
+        margin-top: $spacing-md;
+      }
+
+      p {
+        font-family: $font-primary;
+        font-size: $font-size-medium;
+        color: $text-muted;
+        line-height: 1.6;
+        margin: 0;
+        padding-left: $spacing-sm;
+        border-left: 2px solid $primary-violet;
+        animation: slideInLeft 0.3s ease-out;
+
+        @include respond-to(md) {
+          font-size: $font-size-large;
+          padding-left: $spacing-lg;
+        }
+      }
+    }
+  }
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+// Enhanced hover effects
+.service-item {
+  &::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    width: 4px;
+    height: 0;
+    background: linear-gradient(to bottom, $primary-violet, $primary-light-purple);
+    transform: translateY(-50%);
+    transition: height $transition-medium;
+    border-radius: 2px;
+  }
+
+  &:hover::before,
+  &.hovered::before {
+    height: 60%;
+  }
+}
+
+// Responsive adjustments
+@include respond-to(sm) {
+  .what-i-do-section {
+    padding: $spacing-xl $spacing-md;
+    
+    .services-grid {
+      gap: $spacing-md;
+    }
+    
+    .service-item {
+      padding: $spacing-xl $spacing-md;
+      border-radius: 12px;
+      margin-bottom: $spacing-sm;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      
+      &:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 25px rgba(138, 43, 226, 0.2);
+      }
+    }
+  }
+}

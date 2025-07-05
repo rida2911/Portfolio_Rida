@@ -1,0 +1,118 @@
+<section class="skills-section">
+  <div class="container">
+    <!-- Section Header -->
+    <div class="section-header">
+      <h2 class="section-title">Technical Expertise</h2>
+      <p class="section-subtitle">
+        Comprehensive skill set spanning multiple technologies and domains
+      </p>
+    </div>
+
+    <!-- Filter Buttons -->
+    <div class="filter-container">
+      <button 
+        class="filter-btn" 
+        [class.active]="selectedCategory === 'all'"
+        (click)="filterSkills('all')">
+        All Skills
+      </button>
+      <button 
+        class="filter-btn" 
+        [class.active]="selectedCategory === 'language'"
+        (click)="filterSkills('language')">
+        Languages
+      </button>
+      <button 
+        class="filter-btn" 
+        [class.active]="selectedCategory === 'web'"
+        (click)="filterSkills('web')">
+        Web Dev
+      </button>
+      <button 
+        class="filter-btn" 
+        [class.active]="selectedCategory === 'database'"
+        (click)="filterSkills('database')">
+        Databases
+      </button>
+      <button 
+        class="filter-btn" 
+        [class.active]="selectedCategory === 'ml'"
+        (click)="filterSkills('ml')">
+        ML/AI
+      </button>
+      <button 
+        class="filter-btn" 
+        [class.active]="selectedCategory === 'tool'"
+        (click)="filterSkills('tool')">
+        Tools
+      </button>
+    </div>
+
+    <!-- Skills Grid -->
+    <div class="skills-grid">
+      <div 
+        *ngFor="let category of getFilteredCategories(); trackBy: trackByCategory; let categoryIndex = index" 
+        class="skill-category"
+        [style.animation-delay.ms]="categoryIndex * 100">
+        
+        <!-- Category Header -->
+        <div class="category-header">
+          <span class="category-icon">{{ category.icon }}</span>
+          <h3 class="category-title">{{ category.title }}</h3>
+          <div class="category-line"></div>
+        </div>
+
+        <!-- Skills List -->
+        <div class="skills-list">
+          <div 
+            *ngFor="let skill of category.skills; trackBy: trackBySkill; let skillIndex = index" 
+            class="skill-item"
+            [style.animation-delay.ms]="(categoryIndex * 100) + (skillIndex * 50)">
+            
+            <div class="skill-content">
+              <!-- Skill Icon -->
+              <div class="skill-icon-container">
+                <img 
+                  *ngIf="skill.icon.startsWith('http')" 
+                  [src]="skill.icon" 
+                  [alt]="skill.name + ' icon'"
+                  class="skill-icon"
+                  (error)="onImageError($event)"
+                />
+                <span 
+                  *ngIf="!skill.icon.startsWith('http')" 
+                  class="skill-emoji">
+                  {{ skill.icon }}
+                </span>
+              </div>
+
+              <!-- Skill Name -->
+              <span class="skill-name">{{ skill.name }}</span>
+            </div>
+
+            <!-- Hover Effect -->
+            <div class="skill-hover-effect"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CS Fundamentals Section -->
+    <div class="fundamentals-section">
+      <div class="fundamentals-header">
+        <span class="fundamentals-icon">🎯</span>
+        <h3 class="fundamentals-title">Computer Science Fundamentals</h3>
+      </div>
+      <div class="fundamentals-grid">
+        <div class="fundamental-item" *ngFor="let fundamental of ['Operating Systems', 'DBMS', 'Data Structures', 'System Design', 'Theory of Computation']; let i = index"
+             [style.animation-delay.ms]="i * 100">
+          <div class="fundamental-content">
+            <div class="fundamental-icon">📋</div>
+            <span class="fundamental-name">{{ fundamental }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>

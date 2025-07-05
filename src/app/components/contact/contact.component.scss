@@ -1,0 +1,157 @@
+@import '../../../styles/variables';
+@import '../../../styles/mixins';
+
+.contact-section {
+  padding: $spacing-xs 0;
+  background: $primary-dark;
+  min-height: 40vh;
+  @include flex-center;
+  
+  .container {
+    max-width: 1000px;
+    width: 100%;
+    padding: 0 $spacing-xs;
+  }
+}
+
+.section-title {
+  @include section-heading;
+  color: $text-light;
+  text-align: center;
+  margin-bottom: $spacing-md;
+}
+
+.business-card {
+  @include card;
+  position: relative;
+  overflow: hidden;
+  max-width: 600px;
+  margin: 0 auto;
+  
+  .card-content {
+    position: relative;
+    display: flex !important;
+    flex-direction: row;
+    z-index: 2;
+    justify-content: space-between;
+  }
+  
+  .card-accent {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 6px;
+    background: linear-gradient(to right, $primary-violet, $primary-light-purple, $accent-orange);
+  }
+}
+
+.profile-section {
+  @include flex-vertical-center;
+  gap: $spacing-lg;
+  margin-bottom: $spacing-xl;
+  
+  .profile-image {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 3px solid rgba(255, 255, 255, 0.1);
+    
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+  
+  .profile-info {
+    flex: 1;
+    
+    .name {
+      font-size: $font-size-xl;
+      font-weight: 700;
+      color: $text-light;
+      margin: 0 0 $spacing-xs 0;
+      font-family: $font-primary;
+    }
+    
+    .title {
+      font-size: $font-size-medium;
+      color: $text-muted;
+      margin: 0;
+      font-family: $font-primary;
+    }
+  }
+}
+
+.contact-details {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-md;
+}
+
+.contact-item {
+  @include flex-vertical-center;
+  gap: $spacing-md;
+  padding: $spacing-sm;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all $transition-fast;
+  
+  &:hover {
+    background: rgba(255, 255, 255, 0.05);
+    transform: translateX(5px);
+  }
+  
+  .icon {
+    width: 20px;
+    height: 20px;
+    color: $primary-violet;
+    flex-shrink: 0;
+    
+    svg {
+      width: 100%;
+      height: 100%;
+    }
+  }
+  
+  span {
+    color: $text-light;
+    font-family: $font-primary;
+    font-size: $font-size-medium;
+    text-decoration: none;
+  }
+}
+
+@include respond-to(md) {
+  .business-card {
+    padding: $spacing-xl;
+  }
+  
+  .profile-section {
+    .profile-image {
+      width: 100px;
+      height: 100px;
+    }
+    
+    .profile-info .name {
+      font-size: $font-size-xxl;
+    }
+  }
+}
+
+@include respond-to(sm) {
+  .contact-section .container {
+    padding: 0 $spacing-md;
+  }
+  
+  .profile-section {
+    flex-direction: column;
+    text-align: center;
+    
+    .profile-info .name {
+      font-size: $font-size-xl;
+    }
+  }
+}

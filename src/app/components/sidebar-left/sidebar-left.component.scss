@@ -1,0 +1,210 @@
+@import '../../../styles/variables';
+@import '../../../styles/mixins';
+
+.sidebar-left {
+  position: fixed;
+  top: $header-height;
+  left: 0;
+  height: calc(100vh - #{$header-height});
+  width: 100px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: $spacing-lg 0;
+  z-index: $z-index-sidebar;
+  background-color: rgba($primary-dark, 0.6);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  border-right: 1px solid rgba(255, 255, 255, 0.05);
+
+  .logo {
+    margin-bottom: $spacing-md;
+
+    .logo-circle {
+      width: 55px;
+      height: 55px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, $primary-violet, $primary-purple);
+      @include flex-center;
+
+      span {
+        color: white;
+        font-weight: bold;
+        font-size: $font-size-medium;
+      }
+    }
+  }
+
+  .social-links {
+    margin-top: $spacing-md;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    ul {
+      list-style: none;
+      padding: 18px;
+      margin: 15px;
+
+      li {
+        margin-bottom: $spacing-md;
+        padding: 5px;
+
+        a {
+          display: block;
+          width: 45px; 
+          height: 45px; 
+          border-radius: 50%;
+          background: rgba(255, 255, 255, 0.05);
+          @include flex-center;
+          transition: all $transition-medium;
+
+          i {
+            color: $text-light;
+            font-size: $font-size-small; 
+          }
+
+          &:hover {
+            background: $primary-violet;
+            transform: translateY(-2px); 
+
+            i {
+              color: white;
+            }
+          }
+        }
+        span {
+          font-size: 10px;
+          display: none;
+        }
+      }
+    }
+  }
+  .social-links ul li:hover span {
+    display: block;
+  }
+  .socials {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .resume-button {
+    margin-top: auto;
+    margin-bottom: $spacing-md;
+
+    .download-btn {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: $spacing-xs;
+      color: $text-light;
+      transition: all $transition-medium;
+
+      i {
+        font-size: $font-size-large; 
+        margin-bottom: $spacing-xs;
+        color: $primary-violet;
+      }
+
+      span {
+        font-size: 15px;
+        display: none;
+      }
+
+      &:hover {
+        transform: translateY(-2px);
+
+        span {
+          display: block;
+        }
+
+        i {
+          color: $primary-light-purple;
+        }
+      }
+    }
+  }
+}
+
+// Tablet: Keep left sidebar visible but reduce size
+@media (max-width: 1024px) and (min-width: 769px) {
+  .sidebar-left {
+    width: 80px;
+    
+    .logo .logo-circle {
+      width: 45px;
+      height: 45px;
+    }
+    
+    .social-links ul li a {
+      width: 40px;
+      height: 40px;
+    }
+  }
+}
+
+// Mobile: Keep visible but smaller
+@media (max-width: 768px) {
+  .sidebar-left {
+    width: 60px;
+    padding: $spacing-md 0;
+    
+    .logo .logo-circle {
+      width: 35px;
+      height: 35px;
+    }
+    
+    .social-links ul {
+      padding: 10px;
+      margin: 10px;
+      
+      li a {
+        width: 35px;
+        height: 35px;
+        
+        i {
+          font-size: 12px;
+        }
+      }
+    }
+    
+    .resume-button .download-btn i {
+      font-size: $font-size-medium;
+    }
+  }
+}
+
+// Extra small mobile: Even smaller but still visible
+@media (max-width: 480px) {
+  .sidebar-left {
+    width: 50px;
+    padding: $spacing-sm 0;
+    
+    .logo .logo-circle {
+      width: 30px;
+      height: 30px;
+    }
+    
+    .social-links ul {
+      padding: 8px;
+      margin: 8px;
+      
+      li {
+        margin-bottom: $spacing-sm;
+        
+        a {
+          width: 30px;
+          height: 30px;
+          
+          i {
+            font-size: 10px;
+          }
+        }
+      }
+    }
+    
+    .resume-button .download-btn i {
+      font-size: $font-size-small;
+    }
+  }
+}

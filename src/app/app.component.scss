@@ -1,0 +1,74 @@
+/* app.component.css is the stylesheet for the component-  app.component.ts */
+
+@import '../styles/_variables.scss';
+@import '../styles/mixins.scss';
+
+.app-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: $primary-dark;
+  color: $text-light;
+  overflow-x: hidden;
+  transition: all 0.3s ease;
+
+  &.terminal-mode {
+    background-color: #000;
+  }
+}
+
+.gui-content {
+  display: flex;
+  flex: 1;
+  position: relative;
+}
+
+.main-content {
+  flex: 1;
+  padding: 0;
+  scroll-behavior: smooth;
+  overflow-y: auto;
+  height: calc(100vh - 60px);
+  
+  // Desktop: Space for both sidebars (left: 100px, right: 200px)
+  margin: 0 200px 0 100px;
+  
+  // Tablet: Left sidebar visible (80px), right sidebar collapsed
+  @media (max-width: 1024px) and (min-width: 769px) {
+    margin: 0 0 0 80px;
+  }
+  
+  // Mobile: Left sidebar (60px), right sidebar overlay
+  @media (max-width: 768px) {
+    margin: 0 0 0 60px;
+    padding: 0 $spacing-md;
+  }
+  
+  // Extra small mobile: Left sidebar (50px), right sidebar overlay
+  @media (max-width: 480px) {
+    margin: 0 0 0 50px;
+    padding: 0 $spacing-sm;
+  }
+  
+  section {
+    min-height: 90vh;
+    padding: $spacing-xl 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    
+    // Mobile: Remove horizontal padding since we added it to main-content
+    @media (max-width: 768px) {
+      padding: $spacing-xl 0;
+    }
+    
+    &:not(:last-child) {
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+  }
+}
+
+.terminal-content {
+  flex: 1;
+  height: calc(100vh - 60px);
+}

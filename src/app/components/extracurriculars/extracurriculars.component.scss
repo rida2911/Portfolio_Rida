@@ -1,0 +1,283 @@
+@import '../../../styles/variables';
+@import '../../../styles/mixins';
+
+.extracurriculars-section {
+  padding: $spacing-xl 0;
+  background: $primary-dark;
+  color: $text-light;
+  min-height: 100vh;
+  position: relative;
+
+  // Subtle background pattern
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+      radial-gradient(circle at 20% 20%, rgba(138, 43, 226, 0.1) 0%, transparent 50%),
+      radial-gradient(circle at 80% 80%, rgba(76, 0, 153, 0.1) 0%, transparent 50%);
+    pointer-events: none;
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 $spacing-lg;
+    position: relative;
+    z-index: 1;
+  }
+}
+
+.section-header {
+  text-align: center;
+  margin-bottom: $spacing-xl;
+
+  .section-title {
+    @include section-heading;
+    @include gradient-text(linear-gradient(135deg, $primary-violet, $primary-light-purple));
+    font-size: $font-size-hero;
+    margin-bottom: $spacing-md;
+
+    @include respond-to(md) {
+      font-size: $font-size-xxl;
+    }
+  }
+
+  .section-subtitle {
+    font-size: $font-size-large;
+    color: $text-muted;
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.6;
+  }
+}
+
+.extracurriculars-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: $spacing-xl;
+  margin-bottom: $spacing-xl;
+
+  @include respond-to(md) {
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  }
+}
+
+.extracurricular-card {
+  @include card;
+  position: relative;
+  overflow: hidden;
+  animation: fadeInUp 0.6s ease forwards;
+
+  &:nth-child(2) {
+    animation-delay: 0.2s;
+  }
+
+  &:nth-child(3) {
+    animation-delay: 0.4s;
+  }
+
+  // Color variants
+  &.card--violet {
+    border-left: 4px solid $primary-violet;
+    
+    .card-accent {
+      background: linear-gradient(135deg, $primary-violet, $primary-purple);
+    }
+    
+    .highlight-bullet {
+      background: $primary-violet;
+    }
+  }
+
+  &.card--purple {
+    border-left: 4px solid $primary-purple;
+    
+    .card-accent {
+      background: linear-gradient(135deg, $primary-purple, $primary-violet);
+    }
+    
+    .highlight-bullet {
+      background: $primary-purple;
+    }
+  }
+
+  &.card--light-purple {
+    border-left: 4px solid $primary-light-purple;
+    
+    .card-accent {
+      background: linear-gradient(135deg, $primary-light-purple, $primary-violet);
+    }
+    
+    .highlight-bullet {
+      background: $primary-light-purple;
+    }
+  }
+
+  &:hover {
+    .card-icon .icon {
+      transform: scale(1.2) rotate(10deg);
+    }
+
+    .card-accent {
+      height: 100%;
+    }
+
+    .highlight-item {
+      transform: translateX(5px);
+    }
+  }
+}
+
+.card-header {
+  @include flex-vertical-center;
+  justify-content: space-between;
+  margin-bottom: $spacing-lg;
+
+  .card-icon {
+    .icon {
+      font-size: $font-size-xxl;
+      display: inline-block;
+      transition: transform $transition-medium;
+    }
+  }
+
+  .duration-badge {
+    background: rgba(255, 255, 255, 0.1);
+    padding: $spacing-xs $spacing-sm;
+    border-radius: 20px;
+    font-size: $font-size-small;
+    color: $text-muted;
+    font-weight: 500;
+  }
+}
+
+.card-content {
+  .card-title {
+    font-size: $font-size-xl;
+    font-weight: 700;
+    margin-bottom: $spacing-xs;
+    color: $text-light;
+
+    @include respond-to(md) {
+      font-size: $font-size-large;
+    }
+  }
+
+  .card-organization {
+    font-size: $font-size-medium;
+    color: $primary-light-purple;
+    font-weight: 600;
+    margin-bottom: $spacing-md;
+  }
+
+  .card-description {
+    font-size: $font-size-medium;
+    color: $text-muted;
+    line-height: 1.6;
+    margin-bottom: $spacing-lg;
+  }
+}
+
+.card-highlights {
+  .highlights-title {
+    font-size: $font-size-medium;
+    font-weight: 600;
+    margin-bottom: $spacing-md;
+    color: $text-light;
+  }
+
+  .highlights-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+
+    .highlight-item {
+      @include flex-vertical-center;
+      margin-bottom: $spacing-sm;
+      transition: transform $transition-medium;
+      animation: slideIn 0.5s ease forwards;
+      opacity: 0;
+      animation-delay: 0.3s;
+
+      &:nth-child(2) {
+        animation-delay: 0.4s;
+      }
+
+      &:nth-child(3) {
+        animation-delay: 0.5s;
+      }
+
+      .highlight-bullet {
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        margin-right: $spacing-sm;
+        flex-shrink: 0;
+      }
+
+      .highlight-text {
+        font-size: $font-size-small;
+        color: $text-muted;
+        line-height: 1.5;
+      }
+    }
+  }
+}
+
+.card-footer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  overflow: hidden;
+
+  .card-accent {
+    height: 2px;
+    width: 100%;
+    transition: height $transition-medium;
+    opacity: 0.8;
+  }
+}
+
+// Animations
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+// Responsive adjustments
+@include respond-to(sm) {
+  .extracurriculars-section {
+    padding: $spacing-lg 0;
+  }
+
+  .section-header .section-title {
+    font-size: $font-size-xl;
+  }
+
+  .extracurriculars-grid {
+    gap: $spacing-lg;
+  }
+}

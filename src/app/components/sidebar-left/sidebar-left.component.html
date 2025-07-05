@@ -1,0 +1,27 @@
+<div class="sidebar-left">
+    <div class="logo">
+      <img class="logo-circle" src="rida_head_shot.jpg" alt="rida jahan headshot">
+    </div>
+    
+    <div class="social-links">
+      <ul>
+        <li *ngFor="let link of socialLinks">
+          <div class="socials">
+            <a [href]="link.url" target="_blank" [attr.aria-label]="link.name">
+              <i [class]="link.icon"></i>
+            </a>
+            <span>{{link.name}}</span>
+          </div>
+
+        </li>
+      </ul>
+    </div>
+    
+    <div class="resume-button">
+      <a href="Rida_Jahan_Resume.pdf" class="download-btn" download>
+        <i class="fas fa-file-download"></i>
+        <span>Resume</span>
+      </a>
+    </div>
+
+</div>

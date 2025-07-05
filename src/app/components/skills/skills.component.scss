@@ -1,0 +1,431 @@
+@import '../../../styles/variables';
+@import '../../../styles/mixins';
+
+.skills-section {
+  padding: $spacing-xl 0;
+  background: $primary-dark;
+  min-height: 100vh;
+  position: relative;
+  overflow: hidden;
+
+  // Background effects
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+      radial-gradient(circle at 20% 80%, rgba(138, 43, 226, 0.1) 0%, transparent 50%),
+      radial-gradient(circle at 80% 20%, rgba(76, 0, 153, 0.1) 0%, transparent 50%);
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 $spacing-lg;
+    position: relative;
+    z-index: 2;
+  }
+}
+
+// Section Header
+.section-header {
+  text-align: center;
+  margin-bottom: $spacing-xl;
+  
+  .section-title {
+    @include section-heading;
+    @include gradient-text(linear-gradient(135deg, $primary-violet, $primary-light-purple));
+    font-size: $font-size-hero;
+    margin-bottom: $spacing-md;
+    
+    @include respond-to(md) {
+      font-size: $font-size-xxl;
+    }
+  }
+
+  .section-subtitle {
+    color: $text-muted;
+    font-size: $font-size-large;
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.6;
+  }
+}
+
+// Filter Buttons
+.filter-container {
+  @include flex-center;
+  gap: $spacing-sm;
+  margin-bottom: $spacing-xl;
+  flex-wrap: wrap;
+
+  @include respond-to(md) {
+    gap: $spacing-md;
+  }
+}
+
+.filter-btn {
+  padding: $spacing-sm $spacing-md;
+  background: rgba(255, 255, 255, 0.05);
+  color: $text-muted;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 25px;
+  cursor: pointer;
+  font-size: $font-size-small;
+  font-weight: 500;
+  transition: all $transition-medium;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+
+  &:hover {
+    border-color: $primary-violet;
+    color: $text-light;
+    transform: translateY(-2px);
+  }
+
+  &.active {
+    background: linear-gradient(135deg, $primary-violet, $primary-purple);
+    color: $text-light;
+    border-color: transparent;
+    box-shadow: 0 4px 15px rgba(138, 43, 226, 0.3);
+  }
+
+  @include respond-to(md) {
+    padding: $spacing-sm $spacing-lg;
+    font-size: $font-size-medium;
+  }
+}
+
+// Skills Grid
+.skills-grid {
+  display: grid;
+  gap: $spacing-xl;
+  animation: fadeInUp 0.8s ease-out;
+
+  @include respond-to(lg) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.skill-category {
+  @include card;
+  animation: slideInUp 0.6s ease-out both;
+  
+  &:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 40px rgba(138, 43, 226, 0.2);
+  }
+}
+
+// Category Header
+.category-header {
+  @include flex-vertical-center;
+  gap: $spacing-md;
+  margin-bottom: $spacing-lg;
+  position: relative;
+
+  .category-icon {
+    font-size: $font-size-xl;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+  }
+
+  .category-title {
+    @include gradient-text(linear-gradient(135deg, $primary-violet, $primary-light-purple));
+    font-size: $font-size-xl;
+    font-weight: 600;
+    margin: 0;
+  }
+
+  .category-line {
+    flex: 1;
+    height: 2px;
+    background: linear-gradient(to right, $primary-violet, transparent);
+    border-radius: 1px;
+  }
+}
+
+// Skills List
+.skills-list {
+  display: grid;
+  gap: $spacing-sm;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  
+  @include respond-to(md) {
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: $spacing-md;
+  }
+
+  @include respond-to(lg) {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  }
+}
+
+.skill-item {
+  position: relative;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 12px;
+  padding: $spacing-lg;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  transition: all $transition-medium;
+  cursor: pointer;
+  overflow: hidden;
+  animation: fadeInScale 0.5s ease-out both;
+  text-align: center;
+  min-height: 100px;
+  @include flex-center;
+  flex-direction: column;
+
+  &:hover {
+    transform: translateY(-5px) scale(1.02);
+    border-color: rgba(138, 43, 226, 0.4);
+    box-shadow: 0 10px 30px rgba(138, 43, 226, 0.2);
+
+    .skill-hover-effect {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    .skill-icon {
+      transform: scale(1.15) rotate(8deg);
+    }
+
+    .skill-name {
+      color: $primary-light-purple;
+      transform: translateY(-2px);
+    }
+
+    .skill-icon-container {
+      background: rgba(138, 43, 226, 0.15);
+      border-color: rgba(138, 43, 226, 0.3);
+    }
+  }
+}
+
+.skill-content {
+  @include flex-center;
+  flex-direction: column;
+  gap: $spacing-md;
+  position: relative;
+  z-index: 2;
+  width: 100%;
+}
+
+.skill-icon-container {
+  width: 50px;
+  height: 50px;
+  @include flex-center;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  flex-shrink: 0;
+  transition: all $transition-medium;
+  margin-bottom: $spacing-xs;
+
+  @include respond-to(md) {
+    width: 55px;
+    height: 55px;
+  }
+}
+
+.skill-icon {
+  width: 28px;
+  height: 28px;
+  transition: transform $transition-medium;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+
+  @include respond-to(md) {
+    width: 32px;
+    height: 32px;
+  }
+}
+
+.skill-emoji {
+  font-size: $font-size-xl;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+}
+
+.skill-name {
+  color: $text-light;
+  font-weight: 600;
+  font-size: $font-size-medium;
+  transition: all $transition-medium;
+  text-align: center;
+  line-height: 1.3;
+
+  @include respond-to(md) {
+    font-size: $font-size-large;
+  }
+}
+
+.skill-hover-effect {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, rgba(138, 43, 226, 0.1), rgba(76, 0, 153, 0.1));
+  opacity: 0;
+  transform: scale(0.8);
+  transition: all $transition-medium;
+  border-radius: 12px;
+}
+
+// CS Fundamentals Section
+.fundamentals-section {
+  margin-top: $spacing-xl;
+  @include card;
+  animation: slideInUp 0.8s ease-out both;
+  animation-delay: 0.4s;
+}
+
+.fundamentals-header {
+  @include flex-vertical-center;
+  gap: $spacing-md;
+  margin-bottom: $spacing-lg;
+
+  .fundamentals-icon {
+    font-size: $font-size-xl;
+  }
+
+  .fundamentals-title {
+    @include gradient-text(linear-gradient(135deg, $accent-orange, #ff8c42));
+    font-size: $font-size-xl;
+    font-weight: 600;
+    margin: 0;
+  }
+}
+
+.fundamentals-grid {
+  display: grid;
+  gap: $spacing-md;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+
+  @include respond-to(md) {
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  }
+}
+
+.fundamental-item {
+  @include flex-center;
+  flex-direction: column;
+  gap: $spacing-sm;
+  padding: $spacing-lg;
+  background: rgba(255, 111, 71, 0.1);
+  border-radius: 12px;
+  border: 1px solid rgba(255, 111, 71, 0.2);
+  transition: all $transition-medium;
+  animation: fadeInScale 0.5s ease-out both;
+  text-align: center;
+  min-height: 100px;
+
+  &:hover {
+    transform: translateY(-5px) scale(1.02);
+    box-shadow: 0 10px 25px rgba(255, 111, 71, 0.25);
+    border-color: rgba(255, 111, 71, 0.4);
+  }
+
+  .fundamental-content {
+    @include flex-center;
+    flex-direction: column;
+    gap: $spacing-sm;
+  }
+
+  .fundamental-icon {
+    font-size: $font-size-xl;
+    margin-bottom: $spacing-xs;
+  }
+
+  .fundamental-name {
+    color: $text-light;
+    font-weight: 600;
+    font-size: $font-size-medium;
+    line-height: 1.3;
+
+    @include respond-to(md) {
+      font-size: $font-size-large;
+    }
+  }
+}
+
+// Animations
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInScale {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+// Responsive Design
+@include respond-to(sm) {
+  .skills-section {
+    padding: $spacing-lg 0;
+  }
+
+  .section-header .section-title {
+    font-size: $font-size-xl;
+  }
+
+  .skills-list {
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: $spacing-sm;
+  }
+
+  .skill-item {
+    padding: $spacing-md;
+    min-height: 80px;
+  }
+
+  .skill-icon-container {
+    width: 40px;
+    height: 40px;
+  }
+
+  .skill-icon {
+    width: 24px;
+    height: 24px;
+  }
+
+  .skill-name {
+    font-size: $font-size-small;
+  }
+
+  .fundamentals-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .fundamental-item {
+    padding: $spacing-md;
+    min-height: 80px;
+  }
+}

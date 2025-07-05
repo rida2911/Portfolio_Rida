@@ -1,0 +1,56 @@
+<div class="terminal-container">
+  <!-- Terminal Header -->
+  <div class="terminal-header">
+    <div class="terminal-controls">
+      <div class="control-button close"></div>
+      <div class="control-button minimize"></div>
+      <div class="control-button maximize"></div>
+    </div>
+    <div class="terminal-title">
+      {{ userName }}&#64;portfolio: {{ currentPath }}
+    </div>
+    <div class="terminal-actions">
+      <span class="language-toggle">En</span>
+    </div>
+  </div>
+
+  <!-- Terminal Content -->
+  <div class="terminal-content" #terminalContent>
+    <!-- Welcome ASCII Art -->
+    <div class="ascii-art" *ngIf="terminalLines.length === 2">
+      <pre>{{ getAsciiArt() }}</pre>
+    </div>
+
+    <!-- Terminal Lines -->
+    <div 
+      *ngFor="let line of terminalLines" 
+      class="terminal-line"
+      [ngClass]="'line-' + line.type"
+    >
+      <span class="line-content">{{ line.content }}</span>
+    </div>
+
+    <!-- Current Input Line -->
+    <div class="terminal-line current-line">
+        <div class="input-container">
+          <span class="prompt" #promptRef>
+            <span class="user">{{ userName }}</span>&#64;<span class="host">portfolio</span>:<span class="path">{{ currentPath }}</span>$ 
+          </span>
+            <div class="input-wrapper">
+               <span class="input-text" #inputTextRef>{{ currentInput }}</span>
+               <input 
+                 #terminalInput
+                 type="text" 
+                 class="terminal-input"
+                 [(ngModel)]="currentInput"
+                 (keydown)="onInputKeyDown($event)"
+                 (input)="updateCursorPosition()"
+                 autocomplete="off"
+                 spellcheck="false"
+               />
+               <span class="cursor" #cursorRef [class.blink]="true"></span>
+            </div>
+        </div>
+    </div>
+  </div>
+</div>

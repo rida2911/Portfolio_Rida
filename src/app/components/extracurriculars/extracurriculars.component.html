@@ -1,0 +1,57 @@
+<section class="extracurriculars-section">
+  <div class="container">
+    <!-- Section Header -->
+    <div class="section-header">
+      <h2 class="section-title">Extracurricular Activities</h2>
+      <p class="section-subtitle">
+        Empowering women in tech through leadership, mentorship, and community building
+      </p>
+    </div>
+
+    <!-- Extracurriculars Grid -->
+    <div class="extracurriculars-grid">
+      <div 
+        class="extracurricular-card" 
+        [class]="'card--' + activity.color"
+        *ngFor="let activity of extracurriculars; trackBy: trackByFn"
+      >
+        <!-- Card Header -->
+        <div class="card-header">
+          <div class="card-icon">
+            <span class="icon">{{ activity.icon }}</span>
+          </div>
+          <div class="card-duration">
+            <span class="duration-badge">{{ activity.duration }}</span>
+          </div>
+        </div>
+
+        <!-- Card Content -->
+        <div class="card-content">
+          <h3 class="card-title">{{ activity.title }}</h3>
+          <p class="card-organization">{{ activity.organization }}</p>
+          <p class="card-description">{{ activity.description }}</p>
+
+          <!-- Highlights -->
+          <div class="card-highlights">
+            <h4 class="highlights-title">Key Achievements</h4>
+            <ul class="highlights-list">
+              <li 
+                class="highlight-item" 
+                *ngFor="let highlight of activity.highlights; let i = index"
+                [style.animation-delay]="(i * 0.1) + 's'"
+              >
+                <span class="highlight-bullet"></span>
+                <span class="highlight-text">{{ highlight }}</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Card Footer -->
+        <div class="card-footer">
+          <div class="card-accent"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

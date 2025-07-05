@@ -1,0 +1,23 @@
+<header class="header">
+    <div class="container">
+      <div class="header-content">
+        <div class="logo">
+          <a href="#">Rida Jahan</a>
+        </div>
+        
+        <div class="mode-toggle">
+          <div class="toggle-container">
+            <span class="toggle-label">{{ isTerminalMode ? 'GUI' : 'GUI' }}</span>
+            <div class="slide-toggle" (click)="toggleMode()">
+              <div class="toggle-track" [class.active]="isTerminalMode">
+                <div class="toggle-thumb" [class.active]="isTerminalMode">
+                  <i class="toggle-icon" [ngClass]="isTerminalMode ? 'fas fa-terminal' : 'fas fa-desktop'"></i>
+                </div>
+              </div>
+            </div>
+            <span class="toggle-label">{{ isTerminalMode ? 'CLI' : 'CLI' }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+</header>

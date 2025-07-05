@@ -1,0 +1,135 @@
+@import '../../../styles/variables';
+@import '../../../styles/mixins';
+
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: $header-height;
+  background: rgba($primary-dark, 0.95);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  z-index: $z-index-header;
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    height: 100%;
+    padding: 0 $spacing-lg;
+  }
+
+  .header-content {
+    @include flex-vertical-center;
+    justify-content: space-between;
+    height: 100%;
+  }
+
+  .logo {
+    a {
+      color: $text-light;
+      text-decoration: none;
+      font-size: $font-size-large;
+      font-weight: 700;
+      font-family: $font-primary;
+      margin-left: -150px;
+      
+      &:hover {
+        @include gradient-text(linear-gradient(135deg, $primary-violet, $primary-light-purple));
+      }
+    }
+  }
+
+  .mode-toggle {
+    .toggle-container {
+      @include flex-vertical-center;
+      gap: $spacing-md;
+    }
+
+    .toggle-label {
+      font-size: $font-size-small;
+      color: $text-muted;
+      font-weight: 500;
+      font-family: $font-secondary;
+      min-width: 30px;
+      text-align: center;
+      transition: color $transition-fast;
+    }
+
+    .slide-toggle {
+      cursor: pointer;
+      
+      .toggle-track {
+        width: 50px;
+        height: 24px;
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 12px;
+        position: relative;
+        transition: all $transition-medium;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        
+        &.active {
+          background: linear-gradient(135deg, $primary-violet, $primary-purple);
+          border-color: $primary-violet;
+        }
+        
+        .toggle-thumb {
+          width: 20px;
+          height: 20px;
+          background: $text-light;
+          border-radius: 50%;
+          position: absolute;
+          top: 2px;
+          left: 2px;
+          transition: all $transition-medium;
+          @include flex-center;
+          box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+          
+          &.active {
+            transform: translateX(26px);
+            background: $text-light;
+          }
+          
+          .toggle-icon {
+            font-size: 8px;
+            color: $primary-dark;
+            transition: all $transition-fast;
+          }
+        }
+      }
+      
+      &:hover {
+        .toggle-track {
+          background: rgba(255, 255, 255, 0.15);
+          
+          &.active {
+            background: linear-gradient(135deg, lighten($primary-violet, 10%), lighten($primary-purple, 10%));
+          }
+        }
+      }
+    }
+  }
+}
+
+// Update label colors based on active state
+.mode-toggle .toggle-container {
+  .toggle-label:first-child {
+    color: var(--gui-label-color, #{$text-muted});
+  }
+  
+  .toggle-label:last-child {
+    color: var(--cli-label-color, #{$text-muted});
+  }
+}
+
+// Dynamic label highlighting
+.header {
+  --gui-label-color: #{$text-light};
+  --cli-label-color: #{$text-muted};
+  
+  &.terminal-mode {
+    --gui-label-color: #{$text-muted};
+    --cli-label-color: #{$text-light};
+  }
+}

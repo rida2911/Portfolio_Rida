@@ -1,0 +1,387 @@
+@import '../../../styles/variables';
+@import '../../../styles/mixins';
+
+.terminal-container {
+  width: 100%;
+  max-width: 1000px;
+  height: 900px;
+  margin-top: 150px !important;
+  background: #1e1e1e;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+  font-family: $font-secondary;
+  font-size: 14px;
+  position: relative;
+  margin: 0 auto;
+
+  @include respond-to(md) {
+    height: 500px;
+    font-size: 13px;
+  }
+
+  @include respond-to(sm) {
+    height: 400px;
+    font-size: 12px;
+    border-radius: 8px;
+  }
+}
+
+.terminal-header {
+  @include flex-vertical-center;
+  justify-content: space-between;
+  background: #2d2d2d;
+  padding: 40px 20px;
+  border-bottom: 1px solid #3a3a3a;
+  color: #ffffff;
+  font-size: 13px;
+
+  @include respond-to(sm) {
+    padding: 10px 15px;
+    font-size: 12px;
+  }
+}
+
+.terminal-controls {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.control-button {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: opacity $transition-fast;
+
+  &:hover {
+    opacity: 0.8;
+  }
+
+  &.close {
+    background: #ff5f57;
+  }
+
+  &.minimize {
+    background: #ffbd2e;
+  }
+
+  &.maximize {
+    background: #28ca42;
+  }
+
+  @include respond-to(sm) {
+    width: 10px;
+    height: 10px;
+  }
+}
+
+.terminal-title {
+  font-weight: 500;
+  color: #e8e8e8;
+  text-align: center;
+  flex: 1;
+}
+
+.terminal-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.language-toggle {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 11px;
+  cursor: pointer;
+  transition: background $transition-fast;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.2);
+  }
+}
+
+.terminal-content {
+  height: calc(100% - 60px);
+  padding: 20px;
+  overflow-y: auto;
+  background: #1e1e1e;
+  color: #e8e8e8;
+  line-height: 1.6;
+
+  &::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: #2a2a2a;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: #4a4a4a;
+    border-radius: 4px;
+
+    &:hover {
+      background: #5a5a5a;
+    }
+  }
+
+  @include respond-to(sm) {
+    padding: 15px;
+    height: calc(100% - 50px);
+  }
+}
+
+.ascii-art {
+  margin-bottom: 20px;
+  color: $primary-violet;
+  font-weight: bold;
+  
+  pre {
+    margin: 0;
+    font-family: $font-secondary;
+    font-size: 12px;
+    line-height: 1.2;
+    
+    @include respond-to(sm) {
+      font-size: 10px;
+    }
+  }
+}
+
+.terminal-line {
+  margin-bottom: 4px;
+  word-wrap: break-word;
+  white-space: pre-wrap;
+
+  &.line-input {
+    color: #e8e8e8;
+    
+    .line-content {
+      display: block;
+    }
+  }
+
+  &.line-output {
+    color: #a8e6cf;
+    
+    // Special styling for different output types
+    .line-content {
+      &:contains('📋'), &:contains('💼'), &:contains('🚀'), &:contains('🛠️'), &:contains('🎓'), &:contains('🏆'), &:contains('🌟') {
+        color: #ffd700;
+        font-weight: 500;
+      }
+      
+      &:contains('🔗'), &:contains('📧') {
+        color: $primary-light-purple;
+      }
+      
+      &:contains('⭐') {
+        color: #ffd700;
+      }
+      
+      &:contains('📁'), &:contains('📂') {
+        color: #87ceeb;
+      }
+    }
+  }
+
+  &.line-error {
+    color: #ff6b6b;
+    
+    .line-content::before {
+      content: '❌ ';
+    }
+  }
+}
+
+.current-line {
+  @include flex-vertical-center;
+  margin-top: 10px;
+}
+
+.input-container {
+  display: flex;
+  align-items: baseline;
+  width: 100%;
+  position: relative;
+  font-family: $font-secondary;
+}
+
+.prompt {
+  @include flex-vertical-center;
+  flex-shrink: 0;
+  position: relative;
+  z-index: 1;
+  margin: 0;
+  padding: 0;
+
+  
+  .user {
+    color: $primary-violet;
+    font-weight: 600;
+  }
+  
+  .host {
+    color: #ffffff;
+    font-weight: 500;
+  }
+  
+  .path {
+    color: $primary-light-purple;
+    font-weight: 500;
+  }
+}
+
+.input-wrapper {
+  position: relative;
+  flex: 1;
+//   display: flex;
+//   align-items: center;
+    margin: 0;
+    padding: 0;
+}
+
+.input-text {
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: #e8e8e8;
+  font-family: $font-secondary;
+  font-size: inherit;
+  line-height: inherit;
+  pointer-events: none;
+  white-space: pre; // Preserve spaces
+  visibility: hidden; // Hidden but takes up space for measurement
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.terminal-input {
+  background: transparent;
+  border: none;
+  outline: none;
+  color: #e8e8e8;
+  font-family: $font-secondary;
+  font-size: inherit;
+  line-height: inherit;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  caret-color: transparent;
+  position: relative;
+  z-index: 2;
+  box-sizing: border-box;
+}
+
+.cursor {
+  position: absolute;
+  width: 7px;
+  height: 18px;
+  background: $primary-violet;
+  top: 50%;
+  transform: translateY(-50%);
+  left: 0; // Will be updated by TypeScript
+  pointer-events: none;
+  z-index: 3;
+  
+  &.blink {
+    animation: blink 1s infinite;
+  }
+}
+
+@keyframes blink {
+  0%, 50% {
+    opacity: 1;
+  }
+  51%, 100% {
+    opacity: 0;
+  }
+}
+
+// Responsive typography
+@include respond-to(lg) {
+  .terminal-container {
+    font-size: 14px;
+  }
+}
+
+@include respond-to(md) {
+  .terminal-container {
+    font-size: 13px;
+  }
+}
+
+@include respond-to(sm) {
+  .terminal-container {
+    font-size: 12px;
+  }
+  
+  .terminal-content {
+    line-height: 1.5;
+  }
+}
+
+// Syntax highlighting for code blocks in output
+.line-output {
+  .line-content {
+    // URLs
+    &:contains('https://'), &:contains('http://') {
+      color: $primary-light-purple;
+      text-decoration: underline;
+    }
+    
+    // File paths
+    &:contains('.git'), &:contains('.com'), &:contains('.org') {
+      color: #87ceeb;
+    }
+    
+    // Technologies
+    &:contains('React'), &:contains('Node.js'), &:contains('Python'), &:contains('JavaScript') {
+      color: #61dafb;
+    }
+    
+    // Numbers and percentages
+    &:is([data-content*="0"], [data-content*="1"], [data-content*="2"], [data-content*="3"], [data-content*="4"], [data-content*="5"], [data-content*="6"], [data-content*="7"], [data-content*="8"], [data-content*="9"]):is([data-content*="%"], [data-content*="."]) {
+      color: #ffd700;
+    }
+  }
+}
+
+// Special styling for welcome message and help
+.terminal-line:first-child .line-content,
+.terminal-line:nth-child(2) .line-content {
+  color: $primary-violet;
+  font-weight: 500;
+}
+
+// Hover effects for interactive elements
+.terminal-container:hover {
+  box-shadow: 0 25px 70px rgba(0, 0, 0, 0.5);
+}
+
+// Focus state
+.terminal-input:focus + .cursor {
+  background: #ffffff;
+}
+
+// Selection styling
+::selection {
+  background: rgba($primary-violet, 0.3);
+  color: #ffffff;
+}
+
+// Print styles
+@media print {
+  .terminal-container {
+    box-shadow: none;
+    border: 1px solid #ccc;
+  }
+  
+  .cursor {
+    display: none;
+  }
+}

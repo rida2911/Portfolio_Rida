@@ -1,0 +1,90 @@
+// mixins file for reusable style patterns
+@import 'variables';
+
+// Flexible centering
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+// Vertical centering
+@mixin flex-vertical-center {
+  display: flex;
+  align-items: center;
+}
+
+// Media queries
+@mixin respond-to($breakpoint) {
+  @if $breakpoint == sm {
+    @media (min-width: $breakpoint-sm) { @content; }
+  }
+  @else if $breakpoint == md {
+    @media (min-width: $breakpoint-md) { @content; }
+  }
+  @else if $breakpoint == lg {
+    @media (min-width: $breakpoint-lg) { @content; }
+  }
+  @else if $breakpoint == xl {
+    @media (min-width: $breakpoint-xl) { @content; }
+  }
+}
+
+// Gradient text
+@mixin gradient-text($gradient) {
+  background: $gradient;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+// Section heading
+@mixin section-heading {
+  font-size: $font-size-xxl;
+  font-weight: 700;
+  margin-bottom: $spacing-lg;
+  position: relative;
+  
+  &:after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 0;
+    width: 60px;
+    height: 4px;
+    background: linear-gradient(to right, $primary-violet, $primary-light-purple);
+  }
+}
+
+// Card styling
+@mixin card {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 8px;
+  padding: $spacing-lg;
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: transform $transition-medium, box-shadow $transition-medium;
+  
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  }
+}
+
+// Button styling
+@mixin button {
+  padding: $spacing-sm $spacing-lg;
+  background: linear-gradient(135deg, $primary-violet, $primary-purple);
+  color: $text-light;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all $transition-fast;
+  
+  &:hover {
+    opacity: 0.9;
+    transform: translateY(-2px);
+  }
+}

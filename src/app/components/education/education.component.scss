@@ -1,0 +1,155 @@
+@import '../../../styles/mixins';
+@import '../../../styles//variables';
+
+.education-container {
+  padding: $spacing-xl;
+  background-color: $primary-dark;
+  min-height: 100vh;
+  position: relative;
+}
+
+.section-heading {
+  h2 {
+    @include section-heading;
+  }
+}
+
+// Timeline
+.timeline {
+  position: relative;
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: $spacing-xl 0;
+  
+  &::before {
+    content: '';
+    position: absolute;
+    width: 2px;
+    background-color: rgba($text-muted, 0.3);
+    top: 0;
+    bottom: 0;
+    left: 120px;
+    
+    @include respond-to(sm) {
+      left: 30px;
+    }
+  }
+}
+
+.timeline-item {
+  padding: 0 0 $spacing-xl 150px;
+  position: relative;
+  
+  @include respond-to(sm) {
+    padding-left: 60px;
+  }
+}
+
+.timeline-dot {
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  background: linear-gradient(135deg, $primary-violet, $primary-purple);
+  border-radius: 50%;
+  left: 113px;
+  top: 5px;
+  z-index: 1;
+  box-shadow: 0 0 0 4px rgba($primary-violet, 0.3);
+  
+  @include respond-to(sm) {
+    left: 23px;
+  }
+}
+
+.timeline-date {
+  position: absolute;
+  left: 0;
+  width: 100px;
+  text-align: right;
+  font-size: $font-size-small;
+  font-weight: 500;
+  @include gradient-text(linear-gradient(to right, $primary-violet, $primary-light-purple));
+  top: 5px;
+  
+  @include respond-to(sm) {
+    position: relative;
+    left: -50px;
+    top: -20px;
+    width: auto;
+    text-align: left;
+    margin-bottom: $spacing-sm;
+  }
+}
+
+.timeline-content {
+  @include card;
+  transition: transform $transition-medium;
+  border-left: 3px solid $primary-violet;
+  
+  h3 {
+    margin: 0 0 $spacing-xs 0;
+    font-size: $font-size-large;
+    color: $text-light;
+  }
+  
+  h4 {
+    margin: 0 0 $spacing-md 0;
+    font-size: $font-size-medium;
+    color: $text-muted;
+    font-weight: 500;
+  }
+  
+  .grade {
+    font-weight: 600;
+    color: $primary-violet;
+    margin-bottom: $spacing-md;
+  }
+}
+
+// Course Grid
+.course-content {
+  margin-top: $spacing-lg;
+  
+  h5 {
+    font-size: $font-size-medium;
+    color: $text-light;
+    margin-bottom: $spacing-md;
+  }
+}
+
+.course-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: $spacing-md;
+  
+  @include respond-to(sm) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.course-item {
+  @include flex-vertical-center;
+  gap: $spacing-sm;
+  padding: $spacing-sm;
+  border-radius: 4px;
+  background-color: rgba($text-light, 0.05);
+  transition: all $transition-fast;
+  
+  &:hover {
+    background-color: rgba($primary-violet, 0.1);
+    transform: translateX(5px);
+  }
+  
+  .course-icon {
+    width: 30px;
+    height: 30px;
+    @include flex-center;
+    color: $primary-violet;
+    font-size: $font-size-small;
+  }
+  
+  span {
+    font-size: $font-size-small;
+    color: $text-muted;
+  }
+}

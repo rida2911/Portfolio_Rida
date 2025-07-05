@@ -1,0 +1,41 @@
+<!-- Mobile Menu Toggle Button -->
+<button class="mobile-menu-toggle" 
+        [ngClass]="{ 'active': isMenuOpen }"
+        (click)="toggleMobileMenu($event)"
+        type="button"
+        aria-label="Toggle navigation menu">
+  <span class="hamburger-line"></span>
+  <span class="hamburger-line"></span>
+  <span class="hamburger-line"></span>
+</button>
+
+<!-- Mobile Overlay -->
+<div class="mobile-overlay" 
+     [ngClass]="{ 'active': isMenuOpen }"
+     (click)="toggleMobileMenu()"></div>
+
+<div class="sidebar-right" [ngClass]="{ 'mobile-open': isMenuOpen }">
+  <nav class="navigation">
+    <ul>
+      <li *ngFor="let link of navLinks">
+        <a [href]="link.link" 
+           [ngClass]="{ 'active': link.id === activeSection }"
+           (click)="scrollToSection($event, link.link)">
+          <span class="nav-indicator" [ngClass]="{ 'active': link.id === activeSection }"></span>
+          <span class="nav-text">{{ link.name }}</span>
+        </a>
+      </li>
+    </ul>
+  </nav>
+
+  <!-- <div class="theme-toggle">
+    <button class="toggle-btn" aria-label="Toggle theme">
+      <i class="fas fa-moon"></i>
+      <span>Dark Mode</span>
+    </button>
+  </div> -->
+
+  <div class="scroll-progress">
+    <div class="progress-bar" id="scrollProgressBar"></div>
+  </div>
+</div>

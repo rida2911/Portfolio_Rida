@@ -1,0 +1,75 @@
+<div class="projects-container">
+  <!-- Animated background -->
+  <div class="bg-animation">
+    <div class="floating-shapes">
+      <div class="shape shape-1"></div>
+      <div class="shape shape-2"></div>
+      <div class="shape shape-3"></div>
+      <div class="shape shape-4"></div>
+    </div>
+  </div>
+
+  <!-- Section heading -->
+  <div class="section-heading" data-aos="fade-up">
+    <h2>MY PROJECTS</h2>
+    <p class="section-subtitle">Crafting digital experiences that make a difference</p>
+  </div>
+
+  <!-- Filter buttons -->
+  <div class="projects-filter" data-aos="fade-up" data-aos-delay="100">
+    <div class="filter-wrapper">
+      <button 
+        *ngFor="let category of filterCategories"
+        class="filter-btn"
+        [class.active]="activeFilter === category.key"
+        (click)="filterProjects(category.key)">
+        <span class="filter-icon">{{ category.icon }}</span>
+        <span class="filter-label">{{ category.label }}</span>
+        <span class="filter-count">{{ getCategoryCount(category.key) }}</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Loading state -->
+  <div *ngIf="isLoading" class="loading-container">
+    <div class="loading-spinner"></div>
+    <p>Loading amazing projects...</p>
+  </div>
+
+  <!-- Projects Grid -->
+  <div *ngIf="!isLoading" class="projects-grid" data-aos="fade-up" data-aos-delay="200">
+    <div 
+      *ngFor="let project of filteredProjects; let i = index"
+      class="project-card"
+      [class.featured]="project.featured"
+      [attr.data-category]="project.category"
+      [attr.data-aos-delay]="(i * 100) + 300">
+
+      <!-- Featured Badge -->
+      <div *ngIf="project.featured" class="featured-badge">
+        <span>✨ Featured</span>
+      </div>
+
+      <!-- Image -->
+      <div class="project-image">
+        <img [src]="project.imageUrl" [alt]="project.title" loading="lazy" />
+        <div class="project-overlay">
+          <div class="project-links">
+            <a *ngIf="project.githubUrl" [href]="project.githubUrl" target="_blank" rel="noopener noreferrer" title="View Source Code">GitHub</a>
+            <a *ngIf="project.liveUrl" [href]="project.liveUrl" target="_blank" rel="noopener noreferrer" title="View Live Demo">Live</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Info -->
+      <div class="project-info">
+        <h3>{{ project.title }}</h3>
+        <p>{{ project.description }}</p>
+        <div class="tech-stack">
+          <span *ngFor="let tech of project.technologies">{{ tech }}</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

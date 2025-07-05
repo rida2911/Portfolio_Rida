@@ -1,0 +1,415 @@
+@import '../../../styles/mixins';
+@import '../../../styles/variables';
+
+.achievements-section {
+  padding: $spacing-xl 0;
+  background: $primary-dark;
+  min-height: 100vh;
+  position: relative;
+  overflow: hidden;
+
+  // Background effects
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+      radial-gradient(circle at 10% 20%, rgba(138, 43, 226, 0.15) 0%, transparent 50%),
+      radial-gradient(circle at 90% 80%, rgba(255, 99, 71, 0.1) 0%, transparent 50%),
+      radial-gradient(circle at 50% 50%, rgba(76, 0, 153, 0.08) 0%, transparent 50%);
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 $spacing-lg;
+    position: relative;
+    z-index: 2;
+  }
+}
+
+// Section Header
+.section-header {
+  text-align: center;
+  margin-bottom: $spacing-xl;
+  
+  .section-title {
+    @include section-heading;
+    @include gradient-text(linear-gradient(135deg, $primary-violet, $accent-orange));
+    font-size: $font-size-hero;
+    margin-bottom: $spacing-md;
+    
+    @include respond-to(md) {
+      font-size: $font-size-xxl;
+    }
+  }
+
+  .section-subtitle {
+    color: $text-muted;
+    font-size: $font-size-large;
+    max-width: 700px;
+    margin: 0 auto;
+    line-height: 1.6;
+  }
+}
+
+// Filter Buttons
+.filter-container {
+  @include flex-center;
+  gap: $spacing-sm;
+  margin-bottom: $spacing-xl;
+  flex-wrap: wrap;
+
+  @include respond-to(md) {
+    gap: $spacing-md;
+  }
+}
+
+.filter-btn {
+  padding: $spacing-sm $spacing-md;
+  background: rgba(255, 255, 255, 0.05);
+  color: $text-muted;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 25px;
+  cursor: pointer;
+  font-size: $font-size-small;
+  font-weight: 500;
+  transition: all $transition-medium;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+
+  &:hover {
+    border-color: $primary-violet;
+    color: $text-light;
+    transform: translateY(-2px);
+  }
+
+  &.active {
+    background: linear-gradient(135deg, $primary-violet, $primary-purple);
+    color: $text-light;
+    border-color: transparent;
+    box-shadow: 0 4px 15px rgba(138, 43, 226, 0.4);
+  }
+
+  @include respond-to(md) {
+    padding: $spacing-sm $spacing-lg;
+    font-size: $font-size-medium;
+  }
+}
+
+// Achievements Grid
+.achievements-grid {
+  display: grid;
+  gap: $spacing-xl;
+  margin-bottom: $spacing-xl;
+
+  @include respond-to(lg) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.achievement-card {
+  @include card;
+  position: relative;
+  overflow: hidden;
+  animation: fadeInUp 0.8s ease-out both;
+  
+  &:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4);
+
+    .achievement-glow {
+      opacity: 1;
+      transform: scale(1.1);
+    }
+  }
+}
+
+// Achievement Header
+.achievement-header {
+  @include flex-vertical-center;
+  gap: $spacing-md;
+  margin-bottom: $spacing-lg;
+  position: relative;
+
+  .achievement-icon-container {
+    width: 60px;
+    height: 60px;
+    @include flex-center;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    flex-shrink: 0;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+  }
+
+  .achievement-icon {
+    font-size: 2rem;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+  }
+
+  .achievement-meta {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .achievement-title {
+    @include gradient-text(linear-gradient(135deg, $primary-violet, $primary-light-purple));
+    font-size: $font-size-large;
+    font-weight: 600;
+    margin: 0 0 $spacing-xs 0;
+    line-height: 1.3;
+  }
+
+  .achievement-org {
+    color: $accent-orange;
+    font-size: $font-size-medium;
+    font-weight: 500;
+    margin-bottom: $spacing-xs;
+  }
+
+  .achievement-period {
+    color: $text-muted;
+    font-size: $font-size-small;
+    font-weight: 400;
+  }
+
+  .achievement-amount {
+    @include gradient-text(linear-gradient(135deg, #4CAF50, #8BC34A));
+    font-size: $font-size-xl;
+    font-weight: 700;
+    text-align: right;
+    flex-shrink: 0;
+  }
+}
+
+// Achievement Content
+.achievement-description {
+  margin-bottom: $spacing-lg;
+
+  p {
+    color: $text-light;
+    font-size: $font-size-medium;
+    line-height: 1.6;
+    margin: 0;
+  }
+}
+
+.achievement-highlights {
+  margin-bottom: $spacing-lg;
+
+  .highlights-title {
+    color: $primary-light-purple;
+    font-size: $font-size-small;
+    font-weight: 600;
+    margin-bottom: $spacing-xs;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .highlights-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: $spacing-xs;
+    align-items: center;
+  }
+
+  .highlight-item {
+    color: $text-light;
+    font-size: $font-size-small;
+    background: rgba(138, 43, 226, 0.2);
+    padding: $spacing-xs $spacing-sm;
+    border-radius: 12px;
+    border: 1px solid rgba(138, 43, 226, 0.3);
+    white-space: nowrap;
+  }
+
+  .highlight-separator {
+    color: $text-muted;
+    margin: 0 $spacing-xs;
+  }
+}
+
+// Achievement Footer
+.achievement-footer {
+  @include flex-vertical-center;
+  justify-content: space-between;
+  position: relative;
+}
+
+.category-badge {
+  background: rgba(255, 255, 255, 0.1);
+  color: $text-light;
+  padding: $spacing-xs $spacing-sm;
+  border-radius: 15px;
+  font-size: $font-size-small;
+  font-weight: 500;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+
+  &[data-category="scholarship"] {
+    background: rgba(76, 175, 80, 0.2);
+    border-color: rgba(76, 175, 80, 0.4);
+    color: #4CAF50;
+  }
+
+  &[data-category="competition"] {
+    background: rgba(255, 99, 71, 0.2);
+    border-color: rgba(255, 99, 71, 0.4);
+    color: $accent-orange;
+  }
+
+  &[data-category="academic"] {
+    background: rgba(138, 43, 226, 0.2);
+    border-color: rgba(138, 43, 226, 0.4);
+    color: $primary-violet;
+  }
+
+  &[data-category="program"] {
+    background: rgba(33, 150, 243, 0.2);
+    border-color: rgba(33, 150, 243, 0.4);
+    color: #2196F3;
+  }
+}
+
+.achievement-glow {
+  position: absolute;
+  top: -50%;
+  right: -50%;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  opacity: 0;
+  transform: scale(0.8);
+  transition: all $transition-medium;
+  pointer-events: none;
+
+  &[data-color="google"] {
+    background: radial-gradient(circle, rgba(76, 175, 80, 0.3), transparent);
+  }
+
+  &[data-color="talent"] {
+    background: radial-gradient(circle, rgba(33, 150, 243, 0.3), transparent);
+  }
+
+  &[data-color="hackathon"] {
+    background: radial-gradient(circle, rgba(255, 99, 71, 0.3), transparent);
+  }
+
+  &[data-color="academic"] {
+    background: radial-gradient(circle, rgba(138, 43, 226, 0.3), transparent);
+  }
+}
+
+// Animations
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(60px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+// Mobile responsiveness improvements
+@include respond-to(sm) {
+  .achievements-section {
+    padding: $spacing-lg 0;
+  }
+
+  .section-header .section-title {
+    font-size: $font-size-xl;
+  }
+
+  .achievements-grid {
+    grid-template-columns: 1fr;
+    gap: $spacing-lg;
+  }
+
+  .achievement-header {
+    flex-direction: column;
+    text-align: center;
+    
+    .achievement-meta {
+      text-align: center;
+    }
+    
+    .achievement-amount {
+      text-align: center;
+    }
+  }
+}
+
+// Dark theme enhancements
+@media (prefers-color-scheme: dark) {
+  .achievements-section {
+    background: lighten($primary-dark, 2%);
+  }
+
+  .achievement-card {
+    background: rgba(255, 255, 255, 0.03);
+    border-color: rgba(255, 255, 255, 0.08);
+  }
+}
+
+// High contrast mode support
+@media (prefers-contrast: high) {
+  .achievement-card {
+    border-width: 2px;
+    border-color: rgba(255, 255, 255, 0.3);
+  }
+
+  .category-badge {
+    border-width: 2px;
+  }
+}
+
+// Reduced motion support
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

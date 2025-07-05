@@ -1,0 +1,28 @@
+<!-- <html>, <head>, and <body> tags is not correct for Angular components. Those belong in index.html, not in a component's template. -->
+<div class="app-container" [ngClass]="{'terminal-mode': isTerminalMode, 'gui-mode': !isTerminalMode}">
+  <app-header (modeToggle)="toggleMode()" [isTerminalMode]="isTerminalMode"></app-header>
+
+  <div *ngIf="!isTerminalMode" class="gui-content">
+    <app-sidebar-left></app-sidebar-left>
+
+    <main class="main-content">
+      <section id="about"><app-about></app-about></section>
+      <section id="what-i-do"><app-what-i-do></app-what-i-do></section>
+      <section id="experience"><app-experience></app-experience></section>
+      <section id="projects"><app-projects></app-projects></section>
+      <section id="skills"><app-skills></app-skills></section>
+      <section id="education"><app-education></app-education></section>
+      <section id="achievements"><app-achievements></app-achievements></section>
+      <section id="extracurriculars"><app-extracurriculars></app-extracurriculars></section>
+      <section id="contact"><app-contact></app-contact></section>
+
+      <app-footer></app-footer>
+    </main>
+
+    <app-sidebar-right [activeSection]="activeSection"></app-sidebar-right>
+  </div>
+
+  <div *ngIf="isTerminalMode" class="terminal-content">
+    <app-terminal></app-terminal>
+  </div>
+</div>

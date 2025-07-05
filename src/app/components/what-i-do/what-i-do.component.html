@@ -1,0 +1,22 @@
+<section class="what-i-do-section">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-subtitle">WHAT I DO</span>
+    </div>
+    
+    <div class="services-grid">
+      <div 
+        *ngFor="let service of services; let i = index"
+        class="service-item"
+        (mouseenter)="onMouseEnter(i)"
+        (mouseleave)="onMouseLeave()"
+        [class.hovered]="hoveredIndex === i"
+      >
+        <h3 class="service-title">{{ service.title }}</h3>
+        <div class="service-description" [class.visible]="hoveredIndex === i">
+          <p>{{ service.description }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,60 @@
+<section class="experience-section">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title">Experience</h2>
+      <div class="section-underline"></div>
+    </div>
+
+    <div class="experience-intro">
+      <p>
+        Through diverse internships and leadership roles, I've gained valuable experience in 
+        <span class="highlight">software development</span>, 
+        <span class="highlight">web development</span>, and 
+        <span class="highlight">team leadership</span>. 
+        Each opportunity has shaped my technical skills and professional growth.
+      </p>
+    </div>
+
+    <div class="timeline-container">
+      <div class="timeline-line"></div>
+      
+      <div 
+        *ngFor="let exp of experiences; let i = index" 
+        class="timeline-item"
+        [class.left]="exp.isLeft"
+        [class.right]="!exp.isLeft"
+        [class.hovered]="hoveredExperience === exp.id"
+        (mouseenter)="onMouseEnter(exp.id)"
+        (mouseleave)="onMouseLeave()"
+      >
+        <div class="timeline-marker">
+          <div class="marker-dot"></div>
+          <div class="marker-pulse"></div>
+        </div>
+        
+        <div class="timeline-content">
+          <div class="experience-card">
+            <div class="card-header">
+              <div class="period-badge">{{ exp.period }}</div>
+              <div class="type-badge" [class]="exp.type.toLowerCase()">{{ exp.type }}</div>
+            </div>
+            
+            <h3 class="position-title">{{ exp.position }}</h3>
+            <h4 class="company-name">{{ exp.company }}</h4>
+            
+            <p class="experience-description">{{ exp.description }}</p>
+            
+            <div class="skills-container">
+              <span 
+                *ngFor="let skill of exp.skills" 
+                class="skill-tag"
+              >
+                {{ skill }}
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
