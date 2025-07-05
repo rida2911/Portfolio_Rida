@@ -19,7 +19,7 @@ export const appConfig: ApplicationConfig = {
     providePerformance(() => getPerformance()), 
     provideStorage(() => getStorage()), 
     provideFirebaseApp(() => initializeApp({ 
-      projectId: 'portfolio-khyati-satija'
+      projectId: 'portfolio-rida-jahan'
       // your other Firebase config
     }))
   ]
